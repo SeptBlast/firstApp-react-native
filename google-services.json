@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "149981397597",
+    "firebase_url": "https://react-native-github-repo-app.firebaseio.com",
+    "project_id": "react-native-github-repo-app",
+    "storage_bucket": "react-native-github-repo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149981397597:android:8191b7c5136f145879c3b4",
+        "android_client_info": {
+          "package_name": "online.devesh.github.repo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149981397597-vii731qo0eh64c19henemjnc5cefjmsk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjxtqF9yIc2s-gx9GonDxiT6L0ExB7ZMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149981397597-vii731qo0eh64c19henemjnc5cefjmsk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

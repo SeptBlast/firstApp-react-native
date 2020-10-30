@@ -20,13 +20,17 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "online.devesh.github.repo",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/favicon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/SeptBlast/firstApp-react-native"
   }
 }

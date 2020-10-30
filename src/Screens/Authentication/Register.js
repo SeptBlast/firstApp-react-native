@@ -1,11 +1,59 @@
-import React from "react";
-import { Text, View, Image, StyleSheet, TextInput, Button } from "react-native";
+import React, { Component } from "react";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
-// import { TextInput } from "react-native-gesture-handler";
+import Iconicon from "@expo/vector-icons/Ionicons";
+import firebase from "firebase";
 
-export default class Register extends React.Component {
+export default class Register extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      fullName: "",
+      email: "",
+      password: "",
+    };
+  }
+
+  signUpUser = (fullName, email, password) => {
+    try {
+      if (this.state.password.length < 8) {
+        alert("Enter 8 character password");
+        return;
+      }
+
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(function (resultUser) {
+          if (resultUser.additionalUserInfo.isNewUser) {
+            firebase
+              .database()
+              .ref("/users/" + resultUser.user.uid)
+              .set({
+                user_host: "email",
+                created_at: Date.now(),
+                email: resultUser.user.email,
+                first_name: fullName,
+              });
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     const { navigate } = this.props.navigation;
+
     return (
       <View style={stylesSheetVar.bodyComponent}>
         <Image
@@ -17,41 +65,70 @@ export default class Register extends React.Component {
 
         <Text style={stylesSheetVar.textBody}>
           We being keepers tries our best to reduce the uses of natural
-          resources and tries to keep the society polutant friendly.
+          resources and tries to keep the society pollutant friendly.
         </Text>
 
         <View style={stylesSheetVar.formInput1Body}>
-          <Icon name="mail" size={24} />
+          <Icon name="adduser" size={24} />
           <TextInput
+            onChangeText={(fullName) => this.setState({ fullName })}
+            placeholder="Full Name"
+            style={stylesSheetVar.textInputFormBody}
+          />
+        </View>
+
+        <View style={stylesSheetVar.formInput2Body}>
+          <Iconicon name="ios-at" size={24} />
+          <TextInput
+            onChangeText={(email) => this.setState({ email })}
             placeholder="Email"
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
+
         <View style={stylesSheetVar.formInput2Body}>
-          <Icon name="lock" size={24} />
+          <Iconicon name="ios-lock" size={24} />
           <TextInput
             secureTextEntry
+            onChangeText={(password) => this.setState({ password })}
             placeholder="Password"
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
-        <View style={stylesSheetVar.formInput2Body}>
-          <Icon name="lock" size={24} />
-          <TextInput
-            secureTextEntry
-            placeholder="Confirm Password"
-            style={stylesSheetVar.textInputFormBody}
-          />
-        </View>
-        <View style={stylesSheetVar.buttonRegister}>
-          <Text style={stylesSheetVar.buttonPlaceHolder}>Register</Text>
-        </View>
-        <Text
-          onPress={() => navigate("Login")}
-          style={stylesSheetVar.buttonNewUser}
+
+        <TouchableOpacity
+          onPress={() =>
+            this.signUpUser(
+              this.state.fullName,
+              this.state.email,
+              this.state.password
+            )
+          }
         >
-          Already a User!!!
-        </Text>
+          <View style={stylesSheetVar.buttonRegister}>
+            <Text
+              onPress={() =>
+                this.signUpUser(
+                  this.state.fullName,
+                  this.state.email,
+                  this.state.password
+                )
+              }
+              style={stylesSheetVar.buttonPlaceHolder}
+            >
+              Register
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigate("Login")}>
+          <Text
+            onPress={() => navigate("Login")}
+            style={stylesSheetVar.buttonNewUser}
+          >
+            I am Already a User!!!
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
