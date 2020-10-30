@@ -4,12 +4,7 @@ import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
 import Icon from "@expo/vector-icons/Ionicons";
 import Animated from "react-native-reanimated";
-import {
-  TapGestureHandler,
-  State,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native-gesture-handler";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default class SignIn extends Component {
   constructor(props) {
