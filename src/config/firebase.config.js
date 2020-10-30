@@ -1,18 +1,11 @@
-import firebase from "firebase";
-
-const firebaseConfig = {
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+export const firebaseConfig = {
   apiKey: "AIzaSyBn1J6PFVySzYVy3_Sy_lxa6GOH08bQaHU",
   authDomain: "react-native-github-repo-app.firebaseapp.com",
   databaseURL: "https://react-native-github-repo-app.firebaseio.com",
   projectId: "react-native-github-repo-app",
   storageBucket: "react-native-github-repo-app.appspot.com",
   messagingSenderId: "149981397597",
-  appId: "1:149981397597:web:0a70b590d8371a2479c3b4",
-  measurementId: "G-0ZQC0P3H3S",
+  appId: "1:149981397597:web:2eac0b8d7143a47479c3b4",
+  measurementId: "G-EQ9ZLKNV1N",
 };
-
-console.log(firebaseConfig);
-
-let Firebase = firebase.initializeApp(firebaseConfig);
-
-export default Firebase;
