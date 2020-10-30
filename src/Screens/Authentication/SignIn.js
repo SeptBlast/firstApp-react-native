@@ -3,7 +3,13 @@ import { Text, View, Image, StyleSheet, TextInput, Button } from "react-native";
 import * as Google from "expo-google-app-auth";
 import firebase from "firebase";
 import Icon from "@expo/vector-icons/Ionicons";
-import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
+import Animated from "react-native-reanimated";
+import {
+  TapGestureHandler,
+  State,
+  TouchableHighlight,
+  TouchableOpacity,
+} from "react-native-gesture-handler";
 
 export default class SignIn extends Component {
   constructor(props) {
@@ -17,6 +23,10 @@ export default class SignIn extends Component {
 
   signInUser = (email, password) => {
     try {
+      if (!this.state.password || !this.state.email) {
+        alert("Entered Email and Password are ill Structured");
+        return;
+      }
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -150,30 +160,40 @@ export default class SignIn extends Component {
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
-        <View style={stylesSheetVar.buttonLogin}>
-          <Text
-            onPress={() =>
-              this.signInUser(this.state.email, this.state.password)
-            }
-            style={stylesSheetVar.buttonPlaceHolder}
-          >
-            Already a Member
-          </Text>
-        </View>
-        <View style={stylesSheetVar.buttonLogin}>
-          <Text
-            onPress={() => this.signInWithGoogleAsync()}
-            style={stylesSheetVar.buttonPlaceHolder}
-          >
-            Sign In with Google
-          </Text>
-        </View>
-        <Text
-          onPress={() => navigate("Register")}
-          style={stylesSheetVar.buttonNewUser}
+        <TouchableOpacity
+          onPress={() => this.signInUser(this.state.email, this.state.password)}
         >
-          New User!!!
-        </Text>
+          <View style={stylesSheetVar.buttonLogin}>
+            <Text
+              onPress={() =>
+                this.signInUser(this.state.email, this.state.password)
+              }
+              style={stylesSheetVar.buttonPlaceHolder}
+            >
+              Already a Member
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => this.signInWithGoogleAsync()}>
+          <View style={stylesSheetVar.buttonLogin}>
+            <Text
+              onPress={() => this.signInWithGoogleAsync()}
+              style={stylesSheetVar.buttonPlaceHolder}
+            >
+              Sign In with Google
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigate("Register")}>
+          <Text
+            onPress={() => navigate("Register")}
+            style={stylesSheetVar.buttonNewUser}
+          >
+            It's my First Visit!!!
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }

@@ -3,6 +3,8 @@ import React from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import firebase from "firebase";
+import { FontAwesome } from "@expo/vector-icons";
+import { Asset } from "expo-asset";
 
 import AppNavigator from "./src/Routes/Navigator";
 import { firebaseConfig } from "./src/config/firebase.config";
@@ -10,10 +12,36 @@ import { firebaseConfig } from "./src/config/firebase.config";
 firebase.initializeApp(firebaseConfig);
 LogBox.ignoreLogs(["Setting a timer"]);
 
+function cacheImages(images) {
+  return images.map((image) => {
+    if (typeof image === "string") {
+      return Image.prefetch(image);
+    } else {
+      return Asset.fromModule(image).downloadAsync();
+    }
+  });
+}
+
+function cacheFonts(fonts) {
+  return fonts.map((font) => Font.loadAsync(font));
+}
+
 export default class App extends React.Component {
-  state = {
-    isFontLoaded: false,
-  };
+  constructor() {
+    // @ts-ignore
+    super();
+
+    this.state = {
+      isReady: false,
+      isFontLoaded: false,
+    };
+  }
+
+  async _loadAssetsAsync() {
+    const imageAssets = cacheImages([require("./src/Images/image1.png")]);
+    const fontAssets = cacheFonts([FontAwesome.font]);
+    await Promise.all([...fontAssets, ...imageAssets]);
+  }
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -28,6 +56,15 @@ export default class App extends React.Component {
   }
 
   render() {
+    if (!this.state.isReady) {
+      return (
+        <AppLoading
+          startAsync={this._loadAssetsAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={console.warn}
+        />
+      );
+    }
     return this.state.isFontLoaded === true ? <AppNavigator /> : AppLoading;
   }
 }

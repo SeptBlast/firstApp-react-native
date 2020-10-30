@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Text, View, Image, StyleSheet, TextInput, Button } from "react-native";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
 import Iconicon from "@expo/vector-icons/Ionicons";
 import firebase from "firebase";
@@ -45,6 +53,7 @@ export default class Register extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
+
     return (
       <View style={stylesSheetVar.bodyComponent}>
         <Image
@@ -67,6 +76,7 @@ export default class Register extends Component {
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
+
         <View style={stylesSheetVar.formInput2Body}>
           <Iconicon name="ios-at" size={24} />
           <TextInput
@@ -75,6 +85,7 @@ export default class Register extends Component {
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
+
         <View style={stylesSheetVar.formInput2Body}>
           <Iconicon name="ios-lock" size={24} />
           <TextInput
@@ -84,28 +95,40 @@ export default class Register extends Component {
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
-        {/* <TouchableOpacity style={}> */}
-        <View style={stylesSheetVar.buttonRegister}>
-          <Text
-            onPress={() =>
-              this.signUpUser(
-                this.state.fullName,
-                this.state.email,
-                this.state.password
-              )
-            }
-            style={stylesSheetVar.buttonPlaceHolder}
-          >
-            Register
-          </Text>
-        </View>
-        {/* </TouchableOpacity> */}
-        <Text
-          onPress={() => navigate("Login")}
-          style={stylesSheetVar.buttonNewUser}
+
+        <TouchableOpacity
+          onPress={() =>
+            this.signUpUser(
+              this.state.fullName,
+              this.state.email,
+              this.state.password
+            )
+          }
         >
-          Already a User!!!
-        </Text>
+          <View style={stylesSheetVar.buttonRegister}>
+            <Text
+              onPress={() =>
+                this.signUpUser(
+                  this.state.fullName,
+                  this.state.email,
+                  this.state.password
+                )
+              }
+              style={stylesSheetVar.buttonPlaceHolder}
+            >
+              Register
+            </Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => navigate("Login")}>
+          <Text
+            onPress={() => navigate("Login")}
+            style={stylesSheetVar.buttonNewUser}
+          >
+            I am Already a User!!!
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
