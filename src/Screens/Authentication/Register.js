@@ -1,9 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { Text, View, Image, StyleSheet, TextInput, Button } from "react-native";
 import Icon from "@expo/vector-icons/AntDesign";
-// import { TextInput } from "react-native-gesture-handler";
+import Iconicon from "@expo/vector-icons/Ionicons";
 
-export default class Register extends React.Component {
+export default class Register extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -17,35 +17,36 @@ export default class Register extends React.Component {
 
         <Text style={stylesSheetVar.textBody}>
           We being keepers tries our best to reduce the uses of natural
-          resources and tries to keep the society polutant friendly.
+          resources and tries to keep the society pollutant friendly.
         </Text>
 
         <View style={stylesSheetVar.formInput1Body}>
-          <Icon name="mail" size={24} />
+          <Icon name="adduser" size={24} />
+          <TextInput
+            placeholder="Full Name"
+            style={stylesSheetVar.textInputFormBody}
+          />
+        </View>
+        <View style={stylesSheetVar.formInput2Body}>
+          <Iconicon name="ios-at" size={24} />
           <TextInput
             placeholder="Email"
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
         <View style={stylesSheetVar.formInput2Body}>
-          <Icon name="lock" size={24} />
+          <Iconicon name="ios-lock" size={24} />
           <TextInput
             secureTextEntry
             placeholder="Password"
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
-        <View style={stylesSheetVar.formInput2Body}>
-          <Icon name="lock" size={24} />
-          <TextInput
-            secureTextEntry
-            placeholder="Confirm Password"
-            style={stylesSheetVar.textInputFormBody}
-          />
-        </View>
+        {/* <TouchableOpacity style={}> */}
         <View style={stylesSheetVar.buttonRegister}>
           <Text style={stylesSheetVar.buttonPlaceHolder}>Register</Text>
         </View>
+        {/* </TouchableOpacity> */}
         <Text
           onPress={() => navigate("Login")}
           style={stylesSheetVar.buttonNewUser}

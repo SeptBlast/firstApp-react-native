@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 import { Text, View, Image, StyleSheet, TextInput, Button } from "react-native";
-import Icon from "@expo/vector-icons/AntDesign";
-// import { TextInput } from "react-native-gesture-handler";
+import Icon from "@expo/vector-icons/Ionicons";
 
-export default class SignIn extends React.Component {
+export default class SignIn extends Component {
   render() {
     const { navigate } = this.props.navigation;
 
@@ -18,18 +17,18 @@ export default class SignIn extends React.Component {
 
         <Text style={stylesSheetVar.textBody}>
           We being keepers tries our best to reduce the uses of natural
-          resources and tries to keep the society polutant friendly.
+          resources and tries to keep the society pollutant friendly.
         </Text>
 
         <View style={stylesSheetVar.formInput1Body}>
-          <Icon name="mail" size={24} />
+          <Icon name="ios-at" size={24} />
           <TextInput
             placeholder="Email"
             style={stylesSheetVar.textInputFormBody}
           />
         </View>
         <View style={stylesSheetVar.formInput2Body}>
-          <Icon name="lock" size={24} />
+          <Icon name="ios-lock" size={24} />
           <TextInput
             secureTextEntry
             placeholder="Password"
@@ -39,6 +38,15 @@ export default class SignIn extends React.Component {
         <View style={stylesSheetVar.buttonLogin}>
           {/* <Button name={"Already a Member"} /> */}
           <Text style={stylesSheetVar.buttonPlaceHolder}>Already a Member</Text>
+        </View>
+        <View style={stylesSheetVar.buttonLogin}>
+          {/* <Button name={"Already a Member"} /> */}
+          <Text
+            onPress={() => alert("I was hit badly")}
+            style={stylesSheetVar.buttonPlaceHolder}
+          >
+            Sign In with Google
+          </Text>
         </View>
         <Text
           onPress={() => navigate("Register")}
@@ -114,6 +122,6 @@ const stylesSheetVar = StyleSheet.create({
   buttonNewUser: {
     alignSelf: "center",
     fontFamily: "SemiBold",
-    paddingVertical: 40,
+    paddingVertical: 25,
   },
 });

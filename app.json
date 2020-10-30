@@ -20,8 +20,10 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "online.devesh.github.repo",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/favicon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
