@@ -11,11 +11,16 @@ class DashBoardHome extends React.Component {
       }
     });
   }
+
   render() {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <View style={styles.container}>
           <Text>{this.state.user.email}</Text>
+          <Button
+            title="Profile"
+            onPress={() => this.props.navigation.navigate("Profile")}
+          />
           <Button
             title="Log Off"
             onPress={() => {
@@ -27,6 +32,7 @@ class DashBoardHome extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

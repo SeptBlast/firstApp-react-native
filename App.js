@@ -1,10 +1,11 @@
 import { LogBox } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import * as Font from "expo-font";
 import { AppLoading } from "expo";
 import firebase from "firebase";
 import { FontAwesome } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import AppNavigator from "./src/Routes/Navigator";
 import { firebaseConfig } from "./src/config/firebase.config";
@@ -25,6 +26,19 @@ function cacheImages(images) {
 function cacheFonts(fonts) {
   return fonts.map((font) => Font.loadAsync(font));
 }
+
+// const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
+
+// useEffect(() => {
+//   AsyncStorage.getItem("alreadyLaunched").then((value) => {
+//     if (value == null) {
+//       AsyncStorage.setItem("alreadyLaunched", "true");
+//       setIsFirstLaunch(true);
+//     } else {
+//       setIsFirstLaunch(false);
+//     }
+//   });
+// }, []);
 
 export default class App extends React.Component {
   constructor() {
